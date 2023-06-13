@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projecttpm/loginpage.dart';
 import 'package:projecttpm/view.dart';
 import 'convert_money.dart';
 import 'convert_time.dart';
@@ -6,14 +7,20 @@ import 'home.dart';
 import 'logout.dart';
 
 class MainMenu extends StatefulWidget {
-  const MainMenu({ Key? key }) : super(key: key);
+  const MainMenu({Key? key}) : super(key: key);
 
   @override
   State<MainMenu> createState() => _MainMenuState();
 }
 
 class _MainMenuState extends State<MainMenu> {
-  List<String> appBarTitle = ['Home','API','Money', 'Time', 'Logout'];
+  List<String> appBarTitle = [
+    "Profile",
+    "Valorant API",
+    "Currency Converter",
+    "Time Zone",
+    "Logout"
+  ];
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -26,6 +33,10 @@ class _MainMenuState extends State<MainMenu> {
   ];
 
   void _onItemTapped(int index) {
+    if (index == 4) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    }
     setState(() {
       _selectedIndex = index;
     });
@@ -33,11 +44,11 @@ class _MainMenuState extends State<MainMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
-      appBar: AppBar(
-
-      ),
-      body: Padding(padding: const EdgeInsets.all(20),
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(title: Text(appBarTitle[_selectedIndex] + " Page")),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -60,7 +71,10 @@ class _MainMenuState extends State<MainMenu> {
             label: 'TimeZone',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.logout, color: Colors.red,),
+            icon: Icon(
+              Icons.logout,
+              color: Colors.red,
+            ),
             label: 'Logout',
           ),
         ],

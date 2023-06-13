@@ -21,9 +21,7 @@ class _LogoutPageState extends State<LogoutPage> {
                 primary: Colors.red
               ),
               onPressed: () {
-              Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => LoginPage())
-              );
+              
             }, child: Text("yes"))
           ],
         ),
